@@ -1,0 +1,22 @@
+
+{
+  "name": "WearSense",
+  "short_name": "WearSense",
+  "description": "Discover your perfect palette. Get AI-powered style advice tailored to your unique features.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#F8F9FA",
+  "theme_color": "#6366F1",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
