@@ -1,4 +1,5 @@
 # HaloWear 🎨
+![Screenshot of the App](screen.png)
 
 **HaloWear** is an AI-driven personal stylist that analyzes your unique features—skin tone, undertones, hair, and eye color—to recommend the most flattering color palettes and clothing choices for any occasion.
 
