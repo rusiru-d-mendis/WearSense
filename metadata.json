@@ -1,5 +1,7 @@
 {
   "name": "WearSense",
   "description": "Discover your perfect palette. Get AI-powered style advice tailored to your unique features by uploading a photo.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [
+    "camera"
+  ]
 }
