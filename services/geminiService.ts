@@ -1,12 +1,5 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 import { UserData, StyleAnalysis } from '../types';
-
-if (!process.env.API_KEY) {
-    throw new Error("API_KEY environment variable not set");
-}
-
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const responseSchema = {
     type: Type.OBJECT,
@@ -56,6 +49,13 @@ const responseSchema = {
 };
 
 export const getStyleAnalysis = async (userData: UserData): Promise<StyleAnalysis> => {
+    const apiKey = process.env.API_KEY;
+    if (!apiKey) {
+        throw new Error("Gemini API Key is missing. Please set the API_KEY environment variable in your Vercel project settings.");
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
+
     const prompt = `
         Analyze the person in this photo. First, identify their skin tone (including undertone), hair color, and eye color.
         
@@ -78,7 +78,6 @@ export const getStyleAnalysis = async (userData: UserData): Promise<StyleAnalysi
     try {
         const response = await ai.models.generateContent({
             model: 'gemini-3-flash-preview',
-            // Fix: Updated contents to follow the recommended structure for multipart requests.
             contents: { parts: [imagePart, { text: prompt }] },
             config: {
                 responseMimeType: "application/json",
