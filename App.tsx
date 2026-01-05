@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { UserData, StyleAnalysis } from './types';
 import { getStyleAnalysis } from './services/geminiService';
@@ -115,7 +114,7 @@ export default function App() {
           </p>
           <div className="text-sm text-left bg-white p-4 rounded border border-red-100 font-mono">
             1. Go to Vercel Dashboard<br/>
-            2. Settings > Environment Variables<br/>
+            2. Settings &gt; Environment Variables<br/>
             3. Add name: <b>API_KEY</b><br/>
             4. Value: <i>[Your Gemini API Key]</i><br/>
             5. Redeploy your project

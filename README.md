@@ -1,48 +1,61 @@
 # WearSense 🎨
 
-Discover your perfect palette. WearSense is a smart style assistant that uses the Google Gemini API to provide personalized clothing color and style recommendations from a single photo.
+**WearSense** is an AI-driven personal stylist that analyzes your unique features—skin tone, undertones, hair, and eye color—to recommend the most flattering color palettes and clothing choices for any occasion.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fgoogle-gemini-vignettes%2Freact-wearsense-pwa&env=API_KEY&envDescription=Your%20Google%20Gemini%20API%20Key&project-name=wearsense&repository-name=wearsense)
+Powered by **Gemini 3 Flash**, WearSense transforms a simple photo into a comprehensive style guide.
 
-## ✨ Features
+## ✨ Key Features
 
-*   **🤖 AI-Powered Analysis:** Leverages the Google Gemini API to analyze a photo and identify key features like skin tone.
-*   **🎨 Personalized Color Palettes:** Receive three custom color palettes (e.g., Power Colors, Neutral Basics, Accent Hues) tailored to you.
-*   **👕 Smart Style Suggestions:** Get specific clothing recommendations (e.g., "Blazer in Emerald Green") appropriate for various occasions.
-*   **⚡ Instant & Interactive:** A sleek, single-page application experience built with React and modern web standards.
-*   **📱 PWA Ready:** Installable on your homescreen with offline support for a native-app feel.
-*   **🎨 Beautifully Designed:** A clean, responsive UI built with Tailwind CSS.
+- **Visual Color Analysis**: Uses advanced AI to identify skin tone and undertones from a photo.
+- **Curated Palettes**: Generates custom color schemes (Power Colors, Neutral Basics, Accent Hues) specifically for your complexion.
+- **Occasion-Specific Advice**: Tailors recommendations for Weddings, Business Formal, Casual, or Night Out settings.
+- **PWA Experience**: Fully responsive, installable on mobile devices, and designed for a native-app feel.
+- **Privacy Conscious**: Direct integration with the Gemini API ensuring your data is processed securely.
+
+## 🚀 Quick Start
+
+### 1. Prerequisites
+- A Google Gemini API Key (get one at [aistudio.google.com](https://aistudio.google.com/))
+
+### 2. Local Development
+```bash
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
+```
+
+### 3. Environment Configuration
+Create a `.env` file or set the environment variable:
+`API_KEY=your_gemini_api_key_here`
 
 ## 🛠️ Tech Stack
 
-*   **Frontend:** [React](https://reactjs.org/), [TypeScript](https://www.typescriptlang.org/)
-*   **AI:** [Google Gemini API](https://ai.google.dev/) (`@google/genai`)
-*   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-*   **Dependencies:** Served via [esm.sh](https://esm.sh/) (no `node_modules` or build step!)
+- **Frontend**: React 19, TypeScript
+- **Styling**: Tailwind CSS
+- **AI Engine**: Google Gemini 3 Flash (`@google/genai`)
+- **Build Tool**: Vite 6
+- **Deployment**: Vercel
 
-## 🚀 Deploying to Vercel
+## 📦 Deployment to Vercel
 
-Deploying WearSense to Vercel is the recommended way to get started. It's quick, easy, and free.
+The easiest way to deploy is via the Vercel Dashboard:
 
-### One-Click Deploy
+1. Connect your repository.
+2. Ensure the build command is `npm run build` and output directory is `dist`.
+3. **Critical**: Add your `API_KEY` under **Project Settings > Environment Variables**.
+4. Deploy!
 
-Click the "Deploy with Vercel" button at the top of this README or right here:
+## 📱 Mobile Installation
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fgoogle-gemini-vignettes%2Freact-wearsense-pwa&env=API_KEY&envDescription=Your%20Google%20Gemini%20API%20Key&project-name=wearsense&repository-name=wearsense)
-
-You will be redirected to Vercel, where it will clone the repository and ask you to enter your **Gemini `API_KEY`** as an environment variable. After that, Vercel will handle the rest!
-
-### Manual Deployment
-
-1.  **Fork this repository** to your own GitHub account.
-2.  Go to the [Vercel Dashboard](https://vercel.com/dashboard) and click **"Add New... > Project"**.
-3.  **Import** your forked repository from GitHub.
-4.  In the **"Configure Project"** screen:
-    *   Vercel will automatically detect this as a static project. No changes are needed for the framework preset or build settings.
-    *   Expand the **"Environment Variables"** section.
-    *   Add a new variable with the name `API_KEY` and paste your Google Gemini API key as the value.
-5.  Click **"Deploy"**. That's it! Your app will be live in a few moments.
+Since WearSense is a PWA:
+- **iOS**: Open in Safari, tap the 'Share' icon, and select 'Add to Home Screen'.
+- **Android**: Open in Chrome and tap the 'Add to Home Screen' prompt.
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+*Built with ✨ and Gemini AI*
