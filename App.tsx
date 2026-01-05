@@ -19,7 +19,6 @@ const fileToBase64 = (file: File): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 
-
 export default function App() {
   const [userData, setUserData] = useState<Partial<UserData>>({ occasions: [] });
   const [otherOccasionText, setOtherOccasionText] = useState('');
@@ -28,6 +27,8 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const isApiKeyMissing = !process.env.API_KEY || process.env.API_KEY === 'undefined' || process.env.API_KEY === '';
+
   const handleOccasionSelect = (occasion: string) => {
     setUserData(prev => {
       const currentOccasions = prev.occasions || [];
@@ -35,7 +36,6 @@ export default function App() {
         ? currentOccasions.filter(o => o !== occasion)
         : [...currentOccasions, occasion];
       
-      // If "Other" is deselected, clear the custom text
       if (occasion === 'Other' && !newOccasions.includes('Other')) {
         setOtherOccasionText('');
       }
@@ -54,6 +54,11 @@ export default function App() {
   const isSubmitDisabled = !imageFile || !hasSufficientOccasionData;
 
   const handleSubmit = async () => {
+    if (isApiKeyMissing) {
+      setError("Gemini API Key is missing. Please add API_KEY to your Vercel Environment Variables.");
+      return;
+    }
+
     if (isSubmitDisabled) {
         setError("Please upload a photo and select at least one occasion.");
         return;
@@ -72,7 +77,7 @@ export default function App() {
         const finalOccasions = [
             ...(userData.occasions?.filter(o => o !== 'Other') || []),
             otherOccasionText
-        ].filter(Boolean); // .filter(Boolean) removes any empty strings
+        ].filter(Boolean);
 
         const fullUserData: UserData = {
             image: {
@@ -83,8 +88,8 @@ export default function App() {
         };
         const result = await getStyleAnalysis(fullUserData);
         setAnalysis(result);
-    } catch (e) {
-        setError('Sorry, we couldn\'t generate recommendations. Please try again.');
+    } catch (e: any) {
+        setError(e.message || 'Sorry, we couldn\'t generate recommendations. Please try again.');
         console.error(e);
     } finally {
         setIsLoading(false);
@@ -101,11 +106,29 @@ export default function App() {
   };
 
   const renderContent = () => {
+    if (isApiKeyMissing) {
+      return (
+        <div className="w-full max-w-2xl mx-auto bg-red-50 border border-red-200 rounded-2xl p-8 text-center">
+          <h2 className="text-xl font-bold text-red-800 mb-2">Configuration Required</h2>
+          <p className="text-red-600 mb-4">
+            The Gemini <b>API_KEY</b> is missing from your environment variables.
+          </p>
+          <div className="text-sm text-left bg-white p-4 rounded border border-red-100 font-mono">
+            1. Go to Vercel Dashboard<br/>
+            2. Settings > Environment Variables<br/>
+            3. Add name: <b>API_KEY</b><br/>
+            4. Value: <i>[Your Gemini API Key]</i><br/>
+            5. Redeploy your project
+          </div>
+        </div>
+      );
+    }
+
     if (isLoading) return <LoadingSpinner />;
     if (analysis) return <RecommendationDisplay analysis={analysis} onReset={handleReset} />;
 
     return (
-      <div className="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8 space-y-8">
+      <div className="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8 space-y-8 animate-fade-in">
         <div>
           <h2 className="text-xl font-bold text-gray-800">Upload a Photo</h2>
           <p className="text-gray-500 mt-1">Upload a clear, well-lit photo of yourself for an accurate analysis.</p>
@@ -121,11 +144,11 @@ export default function App() {
             onOtherOccasionChange={setOtherOccasionText}
           />
         </div>
-        {error && <p className="text-red-500 text-center">{error}</p>}
+        {error && <p className="text-red-500 text-center font-medium">{error}</p>}
         <button
           onClick={handleSubmit}
           disabled={isSubmitDisabled}
-          className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors disabled:bg-slate-400 disabled:cursor-not-allowed"
+          className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors disabled:bg-slate-400 disabled:cursor-not-allowed shadow-md"
         >
           <PlusIcon className="w-5 h-5" />
           Get My Style Guide
@@ -153,7 +176,7 @@ export default function App() {
         {renderContent()}
       </main>
       <footer className="text-center py-6 text-gray-500 text-sm">
-        <p>Powered by AI &mdash; WearSense</p>
+        <p>Powered by Gemini 3 &mdash; WearSense</p>
       </footer>
     </div>
   );
