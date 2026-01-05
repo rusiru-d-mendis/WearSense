@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { UserData, StyleAnalysis } from './types';
 import { getStyleAnalysis } from './services/geminiService';
 import { OCCASIONS } from './constants';
-import { PlusIcon, WearSenseIcon } from './components/Icons';
+import { PlusIcon, HaloWearIcon } from './components/Icons';
 
 import PhotoUploader from './components/PhotoUploader';
 import OccasionSelector from './components/OccasionSelector';
@@ -201,8 +201,8 @@ export default function App() {
             📱 Install App
           </button>
         )}
-        <WearSenseIcon className="h-12 w-12 text-indigo-600" />
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2">WearSense</h1>
+        <HaloWearIcon className="h-12 w-12 text-indigo-600" />
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2">HaloWear</h1>
         <p className="text-lg text-gray-600 mt-2 max-w-xl">
           Discover your perfect palette. Get AI-powered style advice tailored to your unique features.
         </p>
@@ -211,7 +211,7 @@ export default function App() {
         {renderContent()}
       </main>
       <footer className="text-center py-6 text-gray-500 text-sm">
-        <p>Powered by Gemini 3 &mdash; WearSense</p>
+        <p>Powered by Gemini 3 &mdash; HaloWear</p>
       </footer>
     </div>
   );

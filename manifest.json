@@ -1,6 +1,6 @@
 {
-  "name": "WearSense - AI Stylist",
-  "short_name": "WearSense",
+  "name": "HaloWear - AI Stylist",
+  "short_name": "HaloWear",
   "description": "Discover your perfect palette. Get AI-powered style advice tailored to your unique features.",
   "start_url": "/",
   "display": "standalone",

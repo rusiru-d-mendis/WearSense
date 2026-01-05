@@ -1,8 +1,8 @@
-# WearSense 🎨
+# HaloWear 🎨
 
-**WearSense** is an AI-driven personal stylist that analyzes your unique features—skin tone, undertones, hair, and eye color—to recommend the most flattering color palettes and clothing choices for any occasion.
+**HaloWear** is an AI-driven personal stylist that analyzes your unique features—skin tone, undertones, hair, and eye color—to recommend the most flattering color palettes and clothing choices for any occasion.
 
-Powered by **Gemini 3 Flash**, WearSense transforms a simple photo into a comprehensive style guide.
+Powered by **Gemini 3 Flash**, HaloWear transforms a simple photo into a comprehensive style guide.
 
 ## ✨ Key Features
 
@@ -49,7 +49,7 @@ The easiest way to deploy is via the Vercel Dashboard:
 
 ## 📱 Mobile Installation
 
-Since WearSense is a PWA:
+Since HaloWear is a PWA:
 - **iOS**: Open in Safari, tap the 'Share' icon, and select 'Add to Home Screen'.
 - **Android**: Open in Chrome and tap the 'Add to Home Screen' prompt.
 

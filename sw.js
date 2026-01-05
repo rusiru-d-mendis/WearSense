@@ -1,4 +1,4 @@
-const CACHE_NAME = 'wearsense-v4';
+const CACHE_NAME = 'halowear-v1';
 const urlsToCache = [
   '/',
   '/index.html',
