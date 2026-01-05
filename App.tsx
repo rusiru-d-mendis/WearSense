@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { UserData, StyleAnalysis } from './types';
 import { getStyleAnalysis } from './services/geminiService';
 import { OCCASIONS } from './constants';
@@ -25,6 +25,34 @@ export default function App() {
   const [analysis, setAnalysis] = useState<StyleAnalysis | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [showInstallBtn, setShowInstallBtn] = useState(false);
+
+  // PWA Install Logic
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: any) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setShowInstallBtn(true);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      console.log('User accepted the install prompt');
+    }
+    setDeferredPrompt(null);
+    setShowInstallBtn(false);
+  };
 
   const isApiKeyMissing = !process.env.API_KEY || process.env.API_KEY === 'undefined' || process.env.API_KEY === '';
 
@@ -164,7 +192,15 @@ export default function App() {
         backgroundAttachment: 'fixed'
       }}
     >
-      <header className="flex flex-col items-center justify-center text-center py-12">
+      <header className="flex flex-col items-center justify-center text-center py-12 relative w-full max-w-4xl">
+        {showInstallBtn && (
+          <button 
+            onClick={handleInstallClick}
+            className="absolute top-0 right-0 px-4 py-2 bg-white/80 backdrop-blur border border-indigo-100 text-indigo-600 rounded-full text-xs font-bold shadow-sm hover:bg-indigo-50 transition-all animate-bounce"
+          >
+            📱 Install App
+          </button>
+        )}
         <WearSenseIcon className="h-12 w-12 text-indigo-600" />
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2">WearSense</h1>
         <p className="text-lg text-gray-600 mt-2 max-w-xl">
